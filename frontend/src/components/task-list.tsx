@@ -5,12 +5,11 @@ import { TaskCard } from "@/components/task-card"
 
 interface TaskListProps {
   tasks: Task[]
-  users: User[]
   onEdit: (task: Task) => void
   onDelete: (taskId: string) => void
 }
 
-export function TaskList({ tasks, users, onEdit, onDelete }: TaskListProps) {
+export function TaskList({ tasks, onEdit, onDelete }: TaskListProps) {
   return (
     <div className="space-y-4">
       {tasks.length === 0 ? (
@@ -21,7 +20,6 @@ export function TaskList({ tasks, users, onEdit, onDelete }: TaskListProps) {
             <TaskCard
               key={task.id}
               task={task}
-              users={users}
               onEdit={() => onEdit(task)}
               onDelete={() => onDelete(task.id)}
             />

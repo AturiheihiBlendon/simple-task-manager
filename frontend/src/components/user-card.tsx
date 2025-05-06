@@ -1,9 +1,14 @@
-"use client"
+"use client";
 
-import type { User } from "@/lib/types"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Edit, Trash2, Mail, UserIcon } from "lucide-react"
+import type { User } from "@/lib/types";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Edit, Trash2, Mail, UserIcon } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,13 +19,13 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+} from "@/components/ui/alert-dialog";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 interface UserCardProps {
-  user: User
-  onEdit: () => void
-  onDelete: () => void
+  user: User;
+  onEdit: () => void;
+  onDelete: () => void;
 }
 
 export function UserCard({ user, onEdit, onDelete }: UserCardProps) {
@@ -29,8 +34,8 @@ export function UserCard({ user, onEdit, onDelete }: UserCardProps) {
       .split(" ")
       .map((n) => n[0])
       .join("")
-      .toUpperCase()
-  }
+      .toUpperCase();
+  };
 
   return (
     <Card className="h-full flex flex-col">
@@ -51,10 +56,6 @@ export function UserCard({ user, onEdit, onDelete }: UserCardProps) {
             <Mail className="h-4 w-4 mr-2" />
             <span>{user.email}</span>
           </div>
-          <div className="flex items-center text-muted-foreground">
-            <UserIcon className="h-4 w-4 mr-2" />
-            <span>User ID: {user.id}</span>
-          </div>
         </div>
       </CardContent>
       <CardFooter className="pt-2 border-t">
@@ -64,7 +65,11 @@ export function UserCard({ user, onEdit, onDelete }: UserCardProps) {
           </Button>
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="outline" size="sm" className="text-red-500 hover:text-red-700">
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-red-500 hover:text-red-700"
+              >
                 <Trash2 className="h-4 w-4 mr-1" /> Delete
               </Button>
             </AlertDialogTrigger>
@@ -72,13 +77,16 @@ export function UserCard({ user, onEdit, onDelete }: UserCardProps) {
               <AlertDialogHeader>
                 <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete the user and remove their data from the
-                  system.
+                  This action cannot be undone. This will permanently delete the
+                  user and remove their data from the system.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={onDelete} className="bg-red-500 hover:bg-red-700">
+                <AlertDialogAction
+                  onClick={onDelete}
+                  className="bg-red-500 hover:bg-red-700"
+                >
                   Delete
                 </AlertDialogAction>
               </AlertDialogFooter>
@@ -87,5 +95,5 @@ export function UserCard({ user, onEdit, onDelete }: UserCardProps) {
         </div>
       </CardFooter>
     </Card>
-  )
+  );
 }

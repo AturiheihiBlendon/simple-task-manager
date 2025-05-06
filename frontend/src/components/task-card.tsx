@@ -1,11 +1,16 @@
-"use client"
+"use client";
 
-import type { Task, User } from "@/lib/types"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Edit, Trash2, Calendar, UserIcon } from "lucide-react"
-import { formatDate } from "@/lib/utils"
+import type { Task, User } from "@/lib/types";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Edit, Trash2, Calendar, UserIcon } from "lucide-react";
+import { formatDate } from "@/lib/utils";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,43 +21,40 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
 
 interface TaskCardProps {
-  task: Task
-  users: User[]
-  onEdit: () => void
-  onDelete: () => void
+  task: any;
+  onEdit: () => void;
+  onDelete: () => void;
 }
 
-export function TaskCard({ task, users, onEdit, onDelete }: TaskCardProps) {
-  const assignee = users.find((user) => user.id === task.assigneeId)
-
+export function TaskCard({ task, onEdit, onDelete }: TaskCardProps) {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "todo":
-        return "bg-blue-100 text-blue-800"
+        return "bg-blue-100 text-blue-800";
       case "in-progress":
-        return "bg-yellow-100 text-yellow-800"
+        return "bg-yellow-100 text-yellow-800";
       case "completed":
-        return "bg-green-100 text-green-800"
+        return "bg-green-100 text-green-800";
       default:
-        return "bg-gray-100 text-gray-800"
+        return "bg-gray-100 text-gray-800";
     }
-  }
+  };
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case "high":
-        return "bg-red-100 text-red-800"
+        return "bg-red-100 text-red-800";
       case "medium":
-        return "bg-orange-100 text-orange-800"
+        return "bg-orange-100 text-orange-800";
       case "low":
-        return "bg-green-100 text-green-800"
+        return "bg-green-100 text-green-800";
       default:
-        return "bg-gray-100 text-gray-800"
+        return "bg-gray-100 text-gray-800";
     }
-  }
+  };
 
   return (
     <Card className="h-full flex flex-col">
@@ -61,7 +63,11 @@ export function TaskCard({ task, users, onEdit, onDelete }: TaskCardProps) {
           <h3 className="font-semibold text-lg">{task.title}</h3>
           <div className="flex space-x-1">
             <Badge className={getStatusColor(task.status)}>
-              {task.status === "todo" ? "To Do" : task.status === "in-progress" ? "In Progress" : "Completed"}
+              {task.status === "todo"
+                ? "To Do"
+                : task.status === "in-progress"
+                ? "In Progress"
+                : "Completed"}
             </Badge>
             <Badge className={getPriorityColor(task.priority)}>
               {task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}
@@ -74,12 +80,12 @@ export function TaskCard({ task, users, onEdit, onDelete }: TaskCardProps) {
         <div className="space-y-2 text-sm">
           <div className="flex items-center text-muted-foreground">
             <Calendar className="h-4 w-4 mr-2" />
-            <span>Due: {formatDate(task.dueDate)}</span>
+            <span>Due: {formatDate(task.due_date)}</span>
           </div>
-          {assignee && (
+          {task?.assignee && (
             <div className="flex items-center text-muted-foreground">
               <UserIcon className="h-4 w-4 mr-2" />
-              <span>Assigned to: {assignee.name}</span>
+              <span>Assigned to: {task?.assignee.name}</span>
             </div>
           )}
         </div>
@@ -91,7 +97,11 @@ export function TaskCard({ task, users, onEdit, onDelete }: TaskCardProps) {
           </Button>
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="outline" size="sm" className="text-red-500 hover:text-red-700">
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-red-500 hover:text-red-700"
+              >
                 <Trash2 className="h-4 w-4 mr-1" /> Delete
               </Button>
             </AlertDialogTrigger>
@@ -99,12 +109,16 @@ export function TaskCard({ task, users, onEdit, onDelete }: TaskCardProps) {
               <AlertDialogHeader>
                 <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                 <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete the task.
+                  This action cannot be undone. This will permanently delete the
+                  task.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={onDelete} className="bg-red-500 hover:bg-red-700">
+                <AlertDialogAction
+                  onClick={onDelete}
+                  className="bg-red-500 hover:bg-red-700"
+                >
                   Delete
                 </AlertDialogAction>
               </AlertDialogFooter>
@@ -113,5 +127,5 @@ export function TaskCard({ task, users, onEdit, onDelete }: TaskCardProps) {
         </div>
       </CardFooter>
     </Card>
-  )
+  );
 }

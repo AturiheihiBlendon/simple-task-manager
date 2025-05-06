@@ -1,16 +1,16 @@
 export interface Task {
-  id: string;
+  id: any;
   title: string;
   description: string;
   status: "todo" | "in-progress" | "completed";
   priority: "low" | "medium" | "high";
-  dueDate: string;
-  assigneeId: string;
+  due_date: string;
+  assignee_id: any;
   createdAt: string;
 }
 
 export interface User {
-  id: string;
+  id: any;
   name: string;
   email: string;
   role: string;
